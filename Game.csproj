@@ -59,5 +59,20 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\assets\images\.gitkeep" />
+    <Content Include="src\assets\shaders\.gitkeep" />
+    <Content Include="src\assets\sounds\.gitkeep" />
+    <Content Include="src\base\utils\.gitkeep" />
+    <Content Include="src\components\ai\.gitkeep" />
+    <Content Include="src\components\events\.gitkeep" />
+    <Content Include="src\scenes\builds\.gitkeep" />
+    <Content Include="src\scenes\characters\.gitkeep" />
+    <Content Include="src\scenes\decorations\.gitkeep" />
+    <Content Include="src\scenes\items\.gitkeep" />
+    <Content Include="src\ui\game_ui\.gitkeep" />
+    <Content Include="src\ui\main_menu\.gitkeep" />
+    <Content Include="src\ui\theme\.gitkeep" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -72,4 +72,8 @@ public class Entity : IAbstractEntity
     }
 }
 ```
-Use camelCase for variable names
+Use camelCase for variable names.
+```c#
+var ThisIsNotCorrect;
+var thisIsCorrect;
+```

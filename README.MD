@@ -74,6 +74,6 @@ public class Entity : IAbstractEntity
 ```
 Use camelCase for variable names.
 ```c#
-var ThisIsNotCorrect;
+var ThisIsNotCorrect; // Pascal case
 var thisIsCorrect;
 ```

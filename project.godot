@@ -21,11 +21,16 @@ _global_script_class_icons={
 [application]
 
 config/name="Game"
+run/main_scene="res://src/Main.tscn"
 config/icon="res://icon.png"
 
 [gdnative]
 
 singletons=[ "res://git_api.gdnlib" ]
+
+[mono]
+
+debugger_agent/wait_for_debugger=true
 
 [rendering]
 

@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://test_content/characters/PlayerDummy.gd" type="Script" id=1]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0, 0.203922, 1, 1 )
+
+[sub_resource type="CapsuleMesh" id=3]
+material = SubResource( 2 )
+radius = 0.476
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.968627, 1, 0.0117647, 1 )
+
+[sub_resource type="SphereMesh" id=5]
+material = SubResource( 4 )
+radius = 0.5
+height = 1.0
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.054902, 0.952941, 0.972549, 1 )
+
+[sub_resource type="CubeMesh" id=7]
+material = SubResource( 6 )
+size = Vector3( 0.25, 0.25, 1.5 )
+
+[node name="Dummy" type="KinematicBody"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Model" type="Spatial" parent="."]
+
+[node name="Body Mesh" type="MeshInstance" parent="Model"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Head Mesh" type="MeshInstance" parent="Model"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57541, 0 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="Hand" type="Spatial" parent="Model"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625689, 0.448248, -0.585057 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Hand Mesh" type="MeshInstance" parent="Model/Hand"]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="Hand2" type="Spatial" parent="Model"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.608, 0.448, -0.585 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Hand Mesh" type="MeshInstance" parent="Model/Hand2"]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CameraBase" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
+
+[node name="CameraRotation" type="Spatial" parent="CameraBase"]
+
+[node name="SpringArm" type="SpringArm" parent="CameraBase/CameraRotation"]
+transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0 )
+spring_length = 5.0
+
+[node name="Camera" type="Camera" parent="CameraBase/CameraRotation/SpringArm"]
+current = true

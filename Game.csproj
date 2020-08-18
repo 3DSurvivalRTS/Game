@@ -74,6 +74,11 @@
     <Content Include="src\ui\game_ui\.gitkeep" />
     <Content Include="src\ui\main_menu\.gitkeep" />
     <Content Include="src\ui\theme\.gitkeep" />
+    <Content Include="test_content\characters\PlayerDummy.tscn" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="temp" />
+    <Folder Include="test_content\tools" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

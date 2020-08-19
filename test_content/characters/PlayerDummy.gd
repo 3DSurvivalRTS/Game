@@ -1,9 +1,9 @@
 extends KinematicBody
 
-const CAMERA_MOUSE_ROTATION_SPEED = 0.001
+const CAMERA_MOUSE_ROTATION_SPEED = 0.003
 const CAMERA_CONTROLLER_ROTATION_SPEED = 3.0
 const CAMERA_X_ROT_MIN = -40
-const CAMERA_X_ROT_MAX = 30
+const CAMERA_X_ROT_MAX = 60
 
 const DIRECTION_INTERPOLATE_SPEED = 1
 const MOTION_INTERPOLATE_SPEED = 10
@@ -58,21 +58,19 @@ func _physics_process(delta):
 	if target.length() > 0.001:
 		var q_from = orientation.basis.get_rotation_quat()
 		var q_to = Transform().looking_at(target, Vector3.UP).basis.get_rotation_quat()
-		# Interpolate current rotation with desired one.
 		orientation.basis = Basis(q_from.slerp(q_to, delta * ROTATION_INTERPOLATE_SPEED))
 	
 	
-	var temp = motion.abs()
-	var temp2 = (temp.x + temp.y)
-	if temp2 > 1:
-		temp2 = 1
+	var motion_abs = motion.abs()
+	var root_motion_c = (motion_abs.x + motion_abs.y)
+	if root_motion_c > 1:
+		root_motion_c = 1
 	root_motion = Transform(
 		Vector3(1, 0, 0),
 		Vector3(0, 1, 0),
 		Vector3(0, 0, 1),
-		Vector3(0, 0, (temp2/100.0*7))
+		Vector3(0, 0, (root_motion_c/100.0*speed))
 		)
-	# Apply root motion to orientation.
 	orientation *= root_motion
 	
 	var h_velocity = -orientation.origin / delta
@@ -81,8 +79,8 @@ func _physics_process(delta):
 	velocity.y += -9.8 * delta
 	velocity = move_and_slide(velocity, Vector3.UP)
 	
-	orientation.origin = Vector3() # Clear accumulated root motion displacement (was applied to speed).
-	orientation = orientation.orthonormalized() # Orthonormalize orientation.
+	orientation.origin = Vector3() 
+	orientation = orientation.orthonormalized() 
 	
 	$Model.global_transform.basis = orientation.basis
 
@@ -91,8 +89,12 @@ func _input(event):
 		var camera_speed_this_frame = CAMERA_MOUSE_ROTATION_SPEED
 		rotate_camera(event.relative * camera_speed_this_frame)
 	if event.is_action("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		is_mouse_captured = false
+		if is_mouse_captured:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			is_mouse_captured = false
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			is_mouse_captured = true
 		
 
 func rotate_camera(move):

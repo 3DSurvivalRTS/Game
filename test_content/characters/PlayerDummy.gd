@@ -17,11 +17,9 @@ var velocity = Vector3()
 var camera_x_rot = 0.0
 
 onready var camera_base = $CameraBase
-onready var camera_rot = camera_base.get_node(@"CameraRotation")
-onready var camera_spring_arm = camera_rot.get_node(@"SpringArm")
-onready var camera_camera = camera_spring_arm.get_node(@"Camera")
-
-onready var ray = $CameraBase/CameraRotation/SpringArm/Camera/RayCast
+onready var camera_rot = $CameraBase/CameraRotation
+onready var camera_spring_arm = $CameraBase/CameraRotation/SpringArm
+onready var camera_camera = $CameraBase/CameraRotation/SpringArm/Camera
 
 var speed = 10
 var acceleration = 5

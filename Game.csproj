@@ -77,7 +77,6 @@
     <Content Include="test_content\characters\PlayerDummy.tscn" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="temp" />
     <Folder Include="test_content\tools" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

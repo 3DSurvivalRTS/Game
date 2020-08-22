@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://navigation/NavigationMeshResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+cellSize = Vector2( 0.15, 0.1 )
+maxNumAgents = 256
+maxAgentSlope = 40.0
+maxAgentHeight = 2.0
+maxAgentClimb = 0.75
+maxAgentRadius = 0.5
+maxEdgeLength = 2.0
+maxSimplificationError = 1.3
+minNumCellsPerIsland = 8
+minCellSpanCount = 20
+maxVertsPerPoly = 6
+tileSize = 42
+layersPerTile = 4
+detailSampleDistance = 6.0
+detailSampleMaxError = 1.0

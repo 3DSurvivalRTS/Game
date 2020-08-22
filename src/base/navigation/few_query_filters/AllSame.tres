@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://navigation/FewQueryFilterResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+filterName = "default"
+ground = 1.0
+road = 1.0
+water = 1.0
+door = 1.0
+grass = 1.0
+jump = 1.0

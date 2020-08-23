@@ -1,50 +1,63 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://test_content/characters/PlayerDummy.tscn" type="PackedScene" id=1]
-
-[sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 0.168627, 0.929412, 0.121569, 1 )
-
-[sub_resource type="CubeMesh" id=2]
-material = SubResource( 1 )
+[ext_resource path="res://test_content/TestEnv.gd" type="Script" id=2]
+[ext_resource path="res://test_content/textures/metallic_tiles/Metal_Plate_Sci-fi_002_basecolor.jpg" type="Texture" id=3]
+[ext_resource path="res://test_content/textures/metallic_tiles/Metal_Plate_Sci-fi_002_ambientOcclusion.jpg" type="Texture" id=4]
+[ext_resource path="res://test_content/textures/metallic_tiles/Metal_Plate_Sci-fi_002_metallic.jpg" type="Texture" id=5]
+[ext_resource path="res://test_content/textures/metallic_tiles/Metal_Plate_Sci-fi_002_roughness.jpg" type="Texture" id=7]
+[ext_resource path="res://test_content/textures/metallic_tiles/Metal_Plate_Sci-fi_002_normal.jpg" type="Texture" id=8]
 
 [sub_resource type="BoxShape" id=3]
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="CubeMesh" id=4]
 
-[sub_resource type="CubeMesh" id=5]
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 500, 1, 500 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_texture = ExtResource( 3 )
+metallic_specular = 0.0
+metallic_texture = ExtResource( 5 )
+roughness_texture = ExtResource( 7 )
+normal_enabled = true
+normal_scale = 0.31
+normal_texture = ExtResource( 8 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 4 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+uv1_scale = Vector3( 145, 100, 1 )
+
+[sub_resource type="CubeMesh" id=6]
+material = SubResource( 7 )
+size = Vector3( 1000, 2, 1000 )
 
 [node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.863501, 0.504347, 0, -0.504347, 0.863501, 0, 7.71088, 9.39027 )
 
 [node name="KinematicBody" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.95533, 7.09726 )
-
-[node name="StaticBody" type="StaticBody" parent="."]
-transform = Transform( 31.3633, 0, 0, 0, 1, 0, 0, 0, 33.7497, 0, 0, 0 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 3 )
+is_current_camera = true
 
 [node name="RigidBody" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.9178, 8.28727, -4.26507 )
+mass = 0.102041
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
 transform = Transform( 9.14025, 0, 0, 0, 4.9986, 0, 0, 0, 12.6378, 0, 0, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBody"]
 transform = Transform( 9.14025, 0, 0, 0, 4.9986, 0, 0, 0, 12.6378, 0, 0, 0 )
-mesh = SubResource( 5 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="RigidBody2" type="RigidBody" parent="."]
@@ -54,37 +67,43 @@ __meta__ = {
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody2"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBody2"]
-mesh = SubResource( 5 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="RigidBody3" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5683, 3.35251, 7.01382 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.402126, 4.124, -0.208814 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody3"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBody3"]
-mesh = SubResource( 5 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="RigidBody4" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0362666, 7.15975, -0.549163 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.530477, 10.0218, -10.2952 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody4"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBody4"]
-mesh = SubResource( 5 )
+mesh = SubResource( 4 )
 material/0 = null
 
-[node name="StaticCamera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.825961, 0.563728, 0, -0.563728, 0.825961, 0.871818, 16.1177, 32.0324 )
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+mesh = SubResource( 6 )
+material/0 = null

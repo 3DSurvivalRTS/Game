@@ -1,5 +1,7 @@
 extends KinematicBody
 
+export var is_current_camera = false
+
 const CAMERA_MOUSE_ROTATION_SPEED = 0.003
 const CAMERA_CONTROLLER_ROTATION_SPEED = 3.0
 const CAMERA_X_ROT_MIN = -40
@@ -32,6 +34,9 @@ func _init():
 
 func _ready():
 	pass
+	
+func _process(delta):
+	camera_camera = is_current_camera
 	
 func _physics_process(delta):
 	
@@ -86,7 +91,7 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		var camera_speed_this_frame = CAMERA_MOUSE_ROTATION_SPEED
 		rotate_camera(event.relative * camera_speed_this_frame)
-	if event.is_action("ui_cancel"):
+	if event.is_action_pressed("ui_cancel"):
 		if is_mouse_captured:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			is_mouse_captured = false

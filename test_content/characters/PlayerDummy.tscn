@@ -80,3 +80,4 @@ spring_length = 5.0
 
 [node name="Camera" type="Camera" parent="CameraBase/CameraRotation/SpringArm"]
 current = true
+far = 300.0

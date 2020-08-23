@@ -75,6 +75,22 @@
     <Content Include="src\ui\main_menu\.gitkeep" />
     <Content Include="src\ui\theme\.gitkeep" />
     <Content Include="test_content\characters\PlayerDummy.tscn" />
+    <Content Include="test_content\TestEnv.gd" />
+    <Content Include="test_content\TestEnv.tscn" />
+    <Content Include="test_content\textures\metallic_tiles\Material_1613.jpg" />
+    <Content Include="test_content\textures\metallic_tiles\Material_1613.jpg.import" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_ambientOcclusion.jpg" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_ambientOcclusion.jpg.import" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_basecolor.jpg" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_basecolor.jpg.import" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_height.png" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_height.png.import" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_metallic.jpg" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_metallic.jpg.import" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_normal.jpg" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_normal.jpg.import" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_roughness.jpg" />
+    <Content Include="test_content\textures\metallic_tiles\Metal_Plate_Sci-fi_002_roughness.jpg.import" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="test_content\tools" />

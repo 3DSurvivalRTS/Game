@@ -14,6 +14,11 @@ func _ready():
 
 
 func _physics_process(delta):
+	follow(target, delta)
+	velocity.y -= 9.8 * delta
+	move_and_slide(velocity, Vector3(0, 1, 0))
+
+func follow(target: Spatial, delta):
 	var direction = Vector3()
 	var target_pos = target.transform.origin
 	var distance_to_target = target_pos.distance_to(transform.origin)
@@ -24,6 +29,3 @@ func _physics_process(delta):
 		velocity = velocity.linear_interpolate(-direction, acceleration * delta)
 	else:
 		velocity = velocity.linear_interpolate(Vector3(), deacceleration * delta)
-	velocity.y -= 9.8 * delta
-	move_and_slide(velocity, Vector3(0, 1, 0))
-	

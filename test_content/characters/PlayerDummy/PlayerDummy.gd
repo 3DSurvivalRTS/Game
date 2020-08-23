@@ -79,7 +79,7 @@ func _physics_process(delta):
 	velocity.x = h_velocity.x
 	velocity.z = h_velocity.z
 	velocity.y += -9.8 * delta
-	velocity = move_and_slide(velocity, Vector3(0, 1, 0), false, 4, 0.785398, true)
+	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
 	
 	orientation.origin = Vector3() 
 	orientation = orientation.orthonormalized() 
@@ -97,6 +97,8 @@ func _input(event):
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			is_mouse_captured = true
+	if event.is_action_pressed("action_jump"):
+		velocity.y += 6
 		
 
 func rotate_camera(move):

@@ -1,6 +1,5 @@
 extends KinematicBody
 
-export var is_current_camera = false
 
 const CAMERA_MOUSE_ROTATION_SPEED = 0.003
 const CAMERA_CONTROLLER_ROTATION_SPEED = 3.0
@@ -36,7 +35,7 @@ func _ready():
 	pass
 	
 func _process(delta):
-	camera_camera = is_current_camera
+	pass
 	
 func _physics_process(delta):
 	
@@ -80,7 +79,7 @@ func _physics_process(delta):
 	velocity.x = h_velocity.x
 	velocity.z = h_velocity.z
 	velocity.y += -9.8 * delta
-	velocity = move_and_slide(velocity, Vector3.UP)
+	velocity = move_and_slide(velocity, Vector3(0, 1, 0), false, 4, 0.785398, true)
 	
 	orientation.origin = Vector3() 
 	orientation = orientation.orthonormalized() 

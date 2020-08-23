@@ -79,5 +79,6 @@ transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 
 spring_length = 5.0
 
 [node name="Camera" type="Camera" parent="CameraBase/CameraRotation/SpringArm"]
+transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
 current = true
 far = 300.0

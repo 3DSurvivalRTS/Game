@@ -67,6 +67,7 @@
     <Content Include="src\base\utils\.gitkeep" />
     <Content Include="src\components\ai\.gitkeep" />
     <Content Include="src\components\events\.gitkeep" />
+    <Content Include="src\Main.tscn" />
     <Content Include="src\scenes\builds\.gitkeep" />
     <Content Include="src\scenes\characters\.gitkeep" />
     <Content Include="src\scenes\decorations\.gitkeep" />

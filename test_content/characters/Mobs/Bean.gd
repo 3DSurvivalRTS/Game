@@ -2,6 +2,8 @@ extends KinematicBody
 
 export var target_path:NodePath
 
+onready var model = $Model
+
 var target:Spatial
 
 var velocity = Vector3()
@@ -22,8 +24,10 @@ func follow(target: Spatial, delta):
 	var direction = Vector3()
 	var target_pos = target.transform.origin
 	var distance_to_target = target_pos.distance_to(transform.origin)
+	var dir_target = target_pos.direction_to(transform.origin).normalized()
+	
+	model.rotation.y = atan2(dir_target.x, dir_target.z)
 	if distance_to_target > 5:
-		var dir_target = target_pos.direction_to(transform.origin).normalized()
 		direction += dir_target * speed
 		direction.y = 0	
 		velocity = velocity.linear_interpolate(-direction, acceleration * delta)

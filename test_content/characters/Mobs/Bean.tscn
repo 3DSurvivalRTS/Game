@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://test_content/characters/Mobs/Bean.gd" type="Script" id=1]
+
+[sub_resource type="CapsuleShape" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.490196, 0.490196, 0.490196, 1 )
+
+[sub_resource type="CapsuleMesh" id=3]
+material = SubResource( 2 )
+
+[sub_resource type="CubeMesh" id=4]
+
+[node name="KinematicBody" type="KinematicBody"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Model" type="Spatial" parent="."]
+
+[node name="Body" type="MeshInstance" parent="Model"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Hand" type="MeshInstance" parent="Model"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.8, -1.03724, 0, -0.741584 )
+mesh = SubResource( 4 )
+material/0 = null

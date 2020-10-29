@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/assets/animations/loading/loader_animation.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://src/base/utils/node2d/RelativePosition.gd" type="Script" id=2]
+
+[node name="Loading" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0.905882, 0.92549, 0.92549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 1178.88, 625.68 )
+scale = Vector2( 0.5, 0.5 )
+frames = ExtResource( 1 )
+frame = 29
+playing = true
+script = ExtResource( 2 )
+persents = Vector2( 0.921, 0.869 )

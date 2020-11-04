@@ -13,7 +13,7 @@ var currentHealth: int
 var ignoreDamage: bool = false
 
 func _ready():
-	if !currentHealth:
+	if !currentHealth: 
 		self.currentHealth = self.health
 
 func damage(damage: int):

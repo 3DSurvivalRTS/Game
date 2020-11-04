@@ -2,9 +2,10 @@ extends Spatial
 
 onready var parent: KinematicBody = get_parent()
 
-export var direction_interpolate_speed: int = 1
-export var motion_interpolate_speed: int = 10
-export var rotation_interpolate_speed: int = 10
+export  var direction_interpolate_speed = 1
+export  var motion_interpolate_speed = 10
+export  var rotation_interpolate_speed = 10
+export (int, 0, 200) var push = 100
 
 var orientation = Transform()
 var root_motion = Transform()
@@ -64,12 +65,17 @@ func _physics_process(delta):
 		velocity.x = h_velocity.x
 		velocity.z = h_velocity.z
 		velocity.y += -9.8 * delta
-		velocity = parent.move_and_slide(velocity, Vector3(0, 1, 0))
+		velocity = parent.move_and_slide(velocity, Vector3(0, 1, 0), false, 4, 0.785398, false)
 		
 		orientation.origin = Vector3() 
 		orientation = orientation.orthonormalized() 
 		
 		parent.get_node("Model").global_transform.basis = orientation.basis
+		
+		for index in parent.get_slide_count():
+			var collision = parent.get_slide_collision(index)
+			if collision.collider.is_in_group("bodies"):
+				collision.collider.apply_central_impulse(-collision.normal * push)
 
 func _input(event):
 	if event.is_action_pressed("action_jump"):

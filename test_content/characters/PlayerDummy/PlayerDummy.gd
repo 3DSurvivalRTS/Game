@@ -15,10 +15,6 @@ var velocity = Vector3()
 var speed = 10
 var acceleration = 5
 
-
-func _process(delta):
-	pass
-	
 func _physics_process(delta):
 	
 	var motion_target = Vector2(

@@ -4,12 +4,6 @@
 
 [node name="CameraBase" type="Spatial"]
 script = ExtResource( 1 )
-is_first_person = null
-is_current_camera = null
-mouse_rotation_speed = null
-controller_rotation_speed = null
-x_rotation_min = null
-x_rotation_max = null
 
 [node name="CameraRotation" type="Spatial" parent="."]
 

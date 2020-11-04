@@ -1,6 +1,6 @@
 extends Spatial
 
-export var is_first_person: bool = false
+export var is_first_person: bool = false # To be discussed
 export var is_current_camera: bool = true
 export var mouse_rotation_speed = 0.003
 export var controller_rotation_speed = 3.0
@@ -27,6 +27,9 @@ func _process(delta):
 	else:
 		camera_spring_arm.spring_length = 5
 		x_rotation_min = -40
+	
+	if camera_camera.current != is_current_camera:
+		camera_camera.current = is_current_camera
 
 func _input(event):
 	if event is InputEventMouseMotion:

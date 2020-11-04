@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://test_content/characters/PlayerDummy/PlayerDummy.gd" type="Script" id=1]
+[ext_resource path="res://test_content/components/CameraComponent/CameraComponent.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -69,16 +70,11 @@ __meta__ = {
 mesh = SubResource( 7 )
 material/0 = null
 
-[node name="CameraBase" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
-
-[node name="CameraRotation" type="Spatial" parent="CameraBase"]
-
-[node name="SpringArm" type="SpringArm" parent="CameraBase/CameraRotation"]
-transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0 )
-spring_length = 5.0
-
-[node name="Camera" type="Camera" parent="CameraBase/CameraRotation/SpringArm"]
-transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
-current = true
-far = 300.0
+[node name="CameraComponent" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62534, 0 )
+is_first_person = false
+is_current_camera = true
+mouse_rotation_speed = 0.003
+controller_rotation_speed = 3.0
+x_rotation_min = -40
+x_rotation_max = 60

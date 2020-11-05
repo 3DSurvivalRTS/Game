@@ -69,5 +69,5 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action_pressed("action_jump"):
 		velocity.y += 6
-	
-	
+	if event is InputEventMouseButton && (event as InputEventMouseButton).button_index == 1:
+		$NealAttack.attack()

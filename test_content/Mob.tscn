@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/components/health/Damageable.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends RigidBody
+
+export(Material) var damageMaterial
+export(Material) var dieMaterial
+
+var damageable
+var mesh: MeshInstance
+
+func _ready():
+	damageable = $Damageable
+	mesh = $MeshInstance
+	$Timer.connect(\"timeout\", self, 'enableDamage')
+
+func _on_Damageable_on_damage(var damage):
+	damageable.ignoreDamage = true
+	mesh.set_material_override(damageMaterial)
+	$Timer.start(1)
+
+
+func _on_Damageable_on_no_health():
+	damageable.ignoreDamage = true
+	mesh.set_material_override(dieMaterial)
+	yield(get_tree().create_timer(0.4), \"timeout\")
+	for child in get_children():
+		child.call_deferred(\"free\")
+	call_deferred(\"free\")
+
+func enableDamage():
+	damageable.ignoreDamage = false
+	mesh.set_material_override(null)
+	$Timer.stop()
+	
+"
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.913725, 0.0352941, 0.0352941, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.105882, 0.25098, 0.819608, 1 )
+
+[sub_resource type="BoxShape" id=5]
+
+[node name="Mob" type="RigidBody"]
+script = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+damageMaterial = SubResource( 6 )
+dieMaterial = SubResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="Damageable" parent="." instance=ExtResource( 2 )]
+health = 200
+
+[node name="CollisionShape" type="CollisionShape" parent="Damageable"]
+shape = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+[connection signal="on_damage" from="Damageable" to="." method="_on_Damageable_on_damage"]
+[connection signal="on_no_health" from="Damageable" to="." method="_on_Damageable_on_no_health"]

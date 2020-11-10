@@ -1,16 +1,19 @@
 extends Spatial
 
+class_name ControllerComponent
+
 onready var parent: KinematicBody = get_parent()
 
 export var rotatable_model_path: NodePath
 export var camera_path: NodePath
 export var attack_component_path: NodePath
+
 export var direction_interpolate_speed = 1
 export var motion_interpolate_speed = 10
 export var rotation_interpolate_speed = 10
 export (int, 0, 200) var push = 100
 
-export var speed: int = 10
+export var speed: int = parent.movement_speed
 export var acceleration: int = 5
 
 var orientation = Transform()
@@ -24,6 +27,7 @@ var attack_component
 
 var is_controllable = false
 var is_mouse_captured = true
+var is_enabled = true
 
 func _ready():
 	camera = get_node(camera_path)
@@ -35,6 +39,8 @@ func _ready():
 
 func _physics_process(delta):
 	if not is_controllable:
+		return
+	if not is_enabled:
 		return
 	var motion_target = Vector2(
 			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -98,5 +104,10 @@ func _input(event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			is_mouse_captured = true
 	if event is InputEventMouseButton && (event as InputEventMouseButton).button_index == 1:
-		attack_component.attack()
+		if attack_component:
+			attack_component.attack()
 	
+func disable():
+	is_enabled = false
+func enable():
+	is_enabled = true

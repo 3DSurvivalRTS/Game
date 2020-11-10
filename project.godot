@@ -9,13 +9,43 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Spatial",
+"class": "CameraComponent",
+"language": "GDScript",
+"path": "res://src/components/camera/CameraComponent.gd"
+}, {
+"base": "Entity",
+"class": "ControllableCharacter",
+"language": "GDScript",
+"path": "res://src/base/controllable_character/ControllableCharacter.gd"
+}, {
+"base": "Spatial",
+"class": "ControllerComponent",
+"language": "GDScript",
+"path": "res://src/components/controller/ControllerComponent.gd"
+}, {
 "base": "Area",
 "class": "Damageable",
 "language": "GDScript",
 "path": "res://src/components/health/Damageable.gd"
+}, {
+"base": "Spatial",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://src/base/entity/Entity.gd"
+}, {
+"base": "ControllableCharacter",
+"class": "Player",
+"language": "GDScript",
+"path": "res://src/scenes/characters/player/Player.gd"
 } ]
 _global_script_class_icons={
-"Damageable": ""
+"CameraComponent": "",
+"ControllableCharacter": "",
+"ControllerComponent": "",
+"Damageable": "",
+"Entity": "",
+"Player": ""
 }
 
 [application]

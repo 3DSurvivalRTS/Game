@@ -3,6 +3,8 @@ extends Spatial
 onready var parent: KinematicBody = get_parent()
 
 export var rotatable_model_path: NodePath
+export var camera_path: NodePath
+export var attack_component_path: NodePath
 export var direction_interpolate_speed = 1
 export var motion_interpolate_speed = 10
 export var rotation_interpolate_speed = 10
@@ -15,19 +17,21 @@ var orientation = Transform()
 var root_motion = Transform()
 var motion = Vector2()
 var velocity = Vector3()
+
 var camera
 var model
-
+var attack_component
 
 var is_controllable = false
 var is_mouse_captured = true
 
 func _ready():
-	camera = parent.get_node("CameraComponent")
+	camera = get_node(camera_path)
 	if camera != null:
 		is_controllable = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
 	model = get_node(rotatable_model_path)
+	attack_component = get_node(attack_component_path)
 
 func _physics_process(delta):
 	if not is_controllable:
@@ -93,4 +97,6 @@ func _input(event):
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			is_mouse_captured = true
+	if event is InputEventMouseButton && (event as InputEventMouseButton).button_index == 1:
+		attack_component.attack()
 	

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://test_content/characters/PlayerDummy/PlayerDummy.gd" type="Script" id=1]
-[ext_resource path="res://test_content/components/CameraComponent/CameraComponent.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/components/controller/ControllerComponent.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/components/camera/CameraComponent.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/components/attack/NearAttack.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -28,8 +29,9 @@ albedo_color = Color( 0.054902, 0.952941, 0.972549, 1 )
 material = SubResource( 6 )
 size = Vector3( 0.25, 0.25, 1.5 )
 
+[sub_resource type="BoxShape" id=8]
+
 [node name="Dummy" type="KinematicBody"]
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -72,9 +74,19 @@ material/0 = null
 
 [node name="CameraComponent" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62534, 0 )
-is_first_person = false
-is_current_camera = true
-mouse_rotation_speed = 0.003
-controller_rotation_speed = 3.0
-x_rotation_min = -40
-x_rotation_max = 60
+
+[node name="Controller" parent="." instance=ExtResource( 1 )]
+rotatable_model_path = NodePath("../Model")
+camera_path = NodePath("../CameraComponent")
+attack_component_path = NodePath("../NearAttack")
+push = 200
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.519344, -1.90731 )
+shape = SubResource( 8 )
+
+[node name="NearAttack" parent="." instance=ExtResource( 3 )]
+attackAreaPath = NodePath("../Area")
+defaultDamage = 20

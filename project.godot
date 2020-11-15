@@ -9,13 +9,37 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area",
+"base": "Resource",
+"class": "AnimationState",
+"language": "GDScript",
+"path": "res://src/components/ai/fsm/AnimationState.gd"
+}, {
+"base": "Resource",
+"class": "BaseState",
+"language": "GDScript",
+"path": "res://src/components/ai/fsm/BaseState.gd"
+}, {
+"base": "Resource",
 "class": "Damageable",
 "language": "GDScript",
-"path": "res://src/components/health/Damageable.gd"
+"path": "res://src/components/health/DamageableResource.gd"
+}, {
+"base": "Spatial",
+"class": "FSM",
+"language": "GDScript",
+"path": "res://src/components/ai/fsm/FSM.gd"
+}, {
+"base": "Resource",
+"class": "TimerState",
+"language": "GDScript",
+"path": "res://src/components/ai/fsm/TimerState.gd"
 } ]
 _global_script_class_icons={
-"Damageable": ""
+"AnimationState": "",
+"BaseState": "",
+"Damageable": "",
+"FSM": "",
+"TimerState": ""
 }
 
 [application]

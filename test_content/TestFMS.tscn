@@ -1,0 +1,147 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/components/ai/fsm/FSM.gd" type="Script" id=1]
+[ext_resource path="res://src/components/ai/fsm/AnimationState.gd" type="Script" id=2]
+[ext_resource path="res://test_content/Agent.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape" id=1]
+
+[sub_resource type="CapsuleMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.368627, 0.854902, 0.145098, 1 )
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+id = 1
+canBack = true
+animation = "Idle"
+animator = NodePath("../AnimationPlayer")
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+id = 2
+canBack = false
+animation = "jump"
+animator = NodePath("../AnimationPlayer")
+
+[sub_resource type="Animation" id=7]
+resource_name = "Idle"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ), Vector3( 90, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MeshInstance:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1.4, 1.4, 1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "jump"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.6, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 0.61, 1, 1.2, 1.4, 1.6, 1.8, 1.9, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1.2 ), Vector3( 1, 1, 1.2 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 0.8 ), Vector3( 1, 1, 1.2 ), Vector3( 1, 1, 0.9 ), Vector3( 1, 1, 1.1 ), Vector3( 1, 1, 0.95 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ConcavePolygonShape" id=5]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[node name="TestFMS" type="Spatial"]
+
+[node name="Agent" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.22717, 0 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Agent"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Agent"]
+transform = Transform( 1.04, 0, 0, 0, -1.69438e-07, -1, 0, 1.04, -1.62921e-07, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 6 )
+
+[node name="FSM" type="Spatial" parent="Agent"]
+script = ExtResource( 1 )
+states = [ SubResource( 9 ), SubResource( 10 ) ]
+defaultStateId = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Agent"]
+anims/Idle = SubResource( 7 )
+anims/jump = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+transform = Transform( 46.7313, 0, 0, 0, 1, 0, 0, 0, 52.0736, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 46.7313, 0, 0, 0, 1, 0, 0, 0, 52.0736, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.682305, -0.14121, 0.717301, 0, 0.981168, 0.193156, -0.731068, -0.131791, 0.669456, 10.6643, 6.82123, 9.54688 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.751149, 0.660133, 0, -0.660133, 0.751149, -2.01021, 10.3917, 4.60818 )
+shadow_enabled = true

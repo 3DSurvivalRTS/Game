@@ -9,13 +9,55 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "BaseState",
+"language": "GDScript",
+"path": "res://test_content/tools/fsm/BaseState.gd"
+}, {
+"base": "Resource",
+"class": "BaseTransitions",
+"language": "GDScript",
+"path": "res://test_content/tools/fsm/BaseTransitions.gd"
+}, {
 "base": "Area",
 "class": "Damageable",
 "language": "GDScript",
 "path": "res://src/components/health/Damageable.gd"
+}, {
+"base": "Node",
+"class": "FSM",
+"language": "GDScript",
+"path": "res://test_content/tools/fsm/FSM.gd"
+}, {
+"base": "BaseState",
+"class": "IdleState",
+"language": "GDScript",
+"path": "res://test_content/tools/fsm/IdleState.gd"
+}, {
+"base": "BaseTransitions",
+"class": "IdleTransitions",
+"language": "GDScript",
+"path": "res://test_content/tools/fsm/IdleTransitions.gd"
+}, {
+"base": "BaseState",
+"class": "WalkingState",
+"language": "GDScript",
+"path": "res://test_content/tools/fsm/WalkingState.gd"
+}, {
+"base": "BaseTransitions",
+"class": "WalkingTransitions",
+"language": "GDScript",
+"path": "res://test_content/tools/fsm/WalkingTransitions.gd"
 } ]
 _global_script_class_icons={
-"Damageable": ""
+"BaseState": "",
+"BaseTransitions": "",
+"Damageable": "",
+"FSM": "",
+"IdleState": "",
+"IdleTransitions": "",
+"WalkingState": "",
+"WalkingTransitions": ""
 }
 
 [application]
@@ -23,6 +65,10 @@ _global_script_class_icons={
 config/name="TeamDevGame"
 run/main_scene="res://test_content/TestEnv.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+settings/fps/force_fps=60
 
 [display]
 

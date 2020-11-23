@@ -5,6 +5,7 @@ onready var parent: KinematicBody = get_parent()
 export var rotatable_model_path: NodePath
 export var camera_path: NodePath
 export var attack_component_path: NodePath
+export var fsm_path: NodePath
 export var direction_interpolate_speed = 1
 export var motion_interpolate_speed = 10
 export var rotation_interpolate_speed = 10
@@ -21,9 +22,16 @@ var velocity = Vector3()
 var camera
 var model
 var attack_component
+var fsm
 
 var is_controllable = false
 var is_mouse_captured = true
+
+var is_moving = false
+var is_jumping = false
+var is_falling = false
+var is_running = false
+
 
 func _ready():
 	camera = get_node(camera_path)
@@ -32,14 +40,21 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
 	model = get_node(rotatable_model_path)
 	attack_component = get_node(attack_component_path)
+	fsm = get_node(fsm_path)
 
 func _physics_process(delta):
 	if not is_controllable:
 		return
+	if fsm == null:
+		return
 	var motion_target = Vector2(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-			Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
-			)
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+		Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
+	)
+	if motion_target == Vector2.ZERO:
+		fsm.set_state(IdleState.id())
+	else:
+		fsm.set_state(WalkingState.id())
 	motion = motion.linear_interpolate(motion_target, motion_interpolate_speed * delta)
 	
 	var camera_basis = camera.global_transform.basis

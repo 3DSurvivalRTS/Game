@@ -1,0 +1,132 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://src/components/controller/ControllerComponent.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/components/camera/CameraComponent.tscn" type="PackedScene" id=2]
+[ext_resource path="res://test_content/characters/Bean/Bean.gd" type="Script" id=3]
+[ext_resource path="res://test_content/tools/fsm/FSM.tscn" type="PackedScene" id=4]
+[ext_resource path="res://test_content/tools/fsm/IdleState.gd" type="Script" id=5]
+[ext_resource path="res://src/base/tools/label3d/DebugLabel3D.tscn" type="PackedScene" id=6]
+[ext_resource path="res://test_content/tools/fsm/WalkingState.gd" type="Script" id=7]
+[ext_resource path="res://test_content/tools/fsm/IdleTransitions.gd" type="Script" id=8]
+[ext_resource path="res://test_content/tools/fsm/WalkingTransitions.gd" type="Script" id=9]
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 7 )
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 8 )
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 9 )
+
+[sub_resource type="CapsuleMesh" id=2]
+radius = 0.4
+mid_height = 1.5
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.4
+height = 1.5
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Model/MeshInstance:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 0.9, 0.9 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "jumping_enter"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Model/MeshInstance:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 0.9 ), Vector3( 1, 1, 1.1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "jumping_exit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Model/MeshInstance:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1.1 ), Vector3( 1, 1, 0.9 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "walking"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Model/MeshInstance:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 0.00571909 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 0.95 ) ]
+}
+
+[node name="KinematicBody" type="KinematicBody"]
+script = ExtResource( 3 )
+
+[node name="FSM" parent="." instance=ExtResource( 4 )]
+states = [ SubResource( 8 ), SubResource( 9 ) ]
+transitions = [ SubResource( 10 ), SubResource( 11 ) ]
+
+[node name="Model" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Model"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 3 )
+anims/jumping_enter = SubResource( 4 )
+anims/jumping_exit = SubResource( 7 )
+anims/walking = SubResource( 6 )
+
+[node name="Controller" parent="." instance=ExtResource( 1 )]
+rotatable_model_path = NodePath("../Model")
+camera_path = NodePath("../CameraBase")
+fsm_path = NodePath("../FSM")
+
+[node name="CameraBase" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.938594, 0 )
+
+[node name="DebugLabel3D" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53793, 0 )
+text = ""

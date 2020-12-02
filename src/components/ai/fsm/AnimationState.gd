@@ -31,7 +31,8 @@ func exit_state():
 
 func animationFinished(animName: String):
 	if animName==animation:
-		fsm.to_previous_or_def()
+		#fsm.to_previous_or_def()
+		emit_signal("finish")
 
 func save_as_previous():
 	return canBack

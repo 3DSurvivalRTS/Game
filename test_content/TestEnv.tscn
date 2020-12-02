@@ -13,13 +13,13 @@
 [ext_resource path="res://test_content/textures/wooden_planks/Stylized_Wood_Planks_001_normal.jpg" type="Texture" id=11]
 [ext_resource path="res://test_content/textures/wooden_planks/Stylized_Wood_Planks_001_ambientOcclusion.jpg" type="Texture" id=12]
 [ext_resource path="res://test_content/textures/wooden_planks/Stylized_Wood_Planks_001_height.png" type="Texture" id=13]
-[ext_resource path="res://test_content/components/CameraComponent/CameraComponent.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/components/camera/CameraComponent.tscn" type="PackedScene" id=14]
 
-[sub_resource type="PhysicsMaterial" id=11]
+[sub_resource type="PhysicsMaterial" id=1]
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 10 )
 roughness_texture = ExtResource( 9 )
 normal_enabled = true
@@ -40,15 +40,15 @@ depth_flip_binormal = false
 depth_texture = ExtResource( 13 )
 uv1_scale = Vector3( 4, 1, 1 )
 
-[sub_resource type="CubeMesh" id=3]
-material = SubResource( 2 )
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 3 )
 
-[sub_resource type="PhysicsMaterial" id=12]
+[sub_resource type="PhysicsMaterial" id=5]
 rough = true
 
-[sub_resource type="SphereShape" id=4]
+[sub_resource type="SphereShape" id=6]
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=7]
 albedo_texture = ExtResource( 3 )
 metallic_texture = ExtResource( 5 )
 roughness_texture = ExtResource( 7 )
@@ -70,15 +70,15 @@ depth_flip_binormal = false
 depth_texture = ExtResource( 6 )
 uv1_scale = Vector3( 3, 1.5, 1 )
 
-[sub_resource type="SphereMesh" id=6]
-material = SubResource( 5 )
+[sub_resource type="SphereMesh" id=8]
+material = SubResource( 7 )
 
-[sub_resource type="PhysicsMaterial" id=7]
+[sub_resource type="PhysicsMaterial" id=9]
 
-[sub_resource type="BoxShape" id=8]
+[sub_resource type="BoxShape" id=10]
 extents = Vector3( 500, 1, 500 )
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=11]
 albedo_texture = ExtResource( 3 )
 metallic = 0.44
 metallic_specular = 0.52
@@ -95,8 +95,8 @@ ao_on_uv2 = false
 ao_texture_channel = 0
 uv1_scale = Vector3( 145, 100, 1 )
 
-[sub_resource type="CubeMesh" id=10]
-material = SubResource( 9 )
+[sub_resource type="CubeMesh" id=12]
+material = SubResource( 11 )
 size = Vector3( 1000, 2, 1000 )
 
 [node name="Spatial" type="Spatial"]
@@ -107,18 +107,18 @@ script = ExtResource( 2 )
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7434, 11.3413, -1.98821 )
 mass = 5.59
-physics_material_override = SubResource( 11 )
+physics_material_override = SubResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
 transform = Transform( 9.14025, 0, 0, 0, 4.9986, 0, 0, 0, 12.6378, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBody"]
 transform = Transform( 9.14025, 0, 0, 0, 4.9986, 0, 0, 0, 12.6378, 0, 0, 0 )
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="RigidBody2" type="RigidBody" parent="." groups=[
@@ -130,10 +130,10 @@ __meta__ = {
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody2"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBody2"]
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="WoodenBox" type="RigidBody" parent="." groups=[
@@ -146,26 +146,26 @@ __meta__ = {
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="WoodenBox"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="WoodenBox"]
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="MetallicSphere" type="RigidBody" parent="." groups=[
 "bodies",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.530477, 3.98867, -10.2952 )
-physics_material_override = SubResource( 12 )
+physics_material_override = SubResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="MetallicSphere"]
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="MetallicSphere"]
-mesh = SubResource( 6 )
+mesh = SubResource( 8 )
 material/0 = null
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
@@ -186,15 +186,15 @@ is_current_camera = false
 
 [node name="Floor" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0203154, 0.0275247, -0.0282328 )
-physics_material_override = SubResource( 7 )
+physics_material_override = SubResource( 9 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="Floor"]
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Floor"]
-mesh = SubResource( 10 )
+mesh = SubResource( 12 )
 material/0 = null

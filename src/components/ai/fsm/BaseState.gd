@@ -2,6 +2,8 @@ extends Resource
 
 class_name BaseState
 
+signal finish
+
 func id() -> int:
 	return 0
 

@@ -14,15 +14,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/components/ai/fsm/AnimationState.gd"
 }, {
+"base": "Object",
+"class": "BackgroundTask",
+"language": "GDScript",
+"path": "res://src/base/tools/background/BackgroundTask.gd"
+}, {
 "base": "Resource",
 "class": "BaseState",
 "language": "GDScript",
 "path": "res://src/components/ai/fsm/BaseState.gd"
-}, {
-"base": "Spatial",
-"class": "CameraComponent",
-"language": "GDScript",
-"path": "res://src/components/camera/CameraComponent.gd"
 }, {
 "base": "Resource",
 "class": "Damageable",
@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/components/ai/fsm/FSM.gd"
 }, {
+"base": "Object",
+"class": "TaskMeta",
+"language": "GDScript",
+"path": "res://src/base/tools/background/TaskMeta.gd"
+}, {
 "base": "Resource",
 "class": "TimerState",
 "language": "GDScript",
@@ -41,10 +46,11 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AnimationState": "",
+"BackgroundTask": "",
 "BaseState": "",
-"CameraComponent": "",
 "Damageable": "",
 "FSM": "",
+"TaskMeta": "",
 "TimerState": ""
 }
 

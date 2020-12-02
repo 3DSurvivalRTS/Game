@@ -2,7 +2,9 @@ extends Object
 
 class_name BackgroundTask
 
-var funcRef: FuncRef
-var params
+var func_ref: FuncRef
+var params: Array
 
 var id
+
+var call_back: FuncRef

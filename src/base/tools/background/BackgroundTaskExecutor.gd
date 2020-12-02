@@ -54,7 +54,10 @@ func process_tasks(data):
 			semaphore.wait()
 			
 func execute_task(task: BackgroundTask):
-	task.funcRef.call_func(task.params)
+	var res = task.func_ref.call_funcv(task.params)
+	print(str(res))
+	if task.call_back:
+		task.call_back.call_func(res)
 	
 func check_task_count() -> bool :
 	if tasks_to_do.size() < task_buffer_size:
